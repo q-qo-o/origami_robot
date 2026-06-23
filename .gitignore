@@ -1,9 +1,0 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
-
-# Generated outputs
-output/
-*.tmp
-
-.claude
