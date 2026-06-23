@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.7">
+    <model name="origami_robot">
+        <link name="face6">
+            <pose>0.16142394696992488 -1.5855049254706463e-06 0.00999990748957913 -9.24890348164022e-06 -1.5707963267521254 0</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666677 0.16666666666666624 0.17642857142856846 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.018413819444445076</ixx>
+                    <iyy>0.01841381944444462</iyy>
+                    <izz>0.03680555555555318</izz>
+                    <ixy>0.009201388888889096</ixy>
+                    <iyz>-7.05815252628962e-17</iyz>
+                    <ixz>-1.873828448197008e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face6_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face6.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face6_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face6.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face7">
+            <pose>0.08571428571061877 -3.8184753481992215e-18 0.01000079276315546 3.141592653394602 -1.5707870778914177 3.141592653583172</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666688 0.1666666666666662 0.09071428571428412 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.01841381944444465</ixx>
+                    <iyy>0.018413819444444215</iyy>
+                    <izz>0.03680555555555322</izz>
+                    <ixy>0.00920138888888904</ixy>
+                    <iyz>-6.914936106389733e-17</iyz>
+                    <ixz>-2.3396161733907047e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face7_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face7.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face7_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face7.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face5">
+            <pose>-0.020004624450884453 9.249942190505888e-08 0.267142764632436 3.14159265354702 -3.083563447699235e-15 3.1415834046863114</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.166666666666663 0.16666666666666508 0.26214285714285507 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.01841381944444206</ixx>
+                    <iyy>0.018413819444444736</iyy>
+                    <izz>0.03680555555555569</izz>
+                    <ixy>0.009201388888888473</ixy>
+                    <iyz>-1.7211224124533915e-16</iyz>
+                    <ixz>-9.023204587541582e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face5_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face5.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face5_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face5.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face3">
+            <pose>-0.5342903386926017 4.849089353698152e-06 -0.010004849089347019 4.62468180539605e-06 1.5707870778914277 -4.62442348850075e-06</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.1666666666666662 0.16666666666666596 0.5192857142857059 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.018413819444450107</ixx>
+                    <iyy>0.018413819444448535</iyy>
+                    <izz>0.036805555555553274</izz>
+                    <ixy>0.009201388888887956</ixy>
+                    <iyz>2.674156071073527e-16</iyz>
+                    <ixz>-5.4098962019727696e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face3_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face3.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face3_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face3.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face2">
+            <pose>-0.4385714285714252 -1.8561551357347203e-16 -0.0099999999999946 7.754586590738845e-17 1.570796326794884 0</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666613 0.16666666666666588 0.43357142857142167 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.018413819444448212</ixx>
+                    <iyy>0.018413819444447067</iyy>
+                    <izz>0.03680555555555336</izz>
+                    <ixy>0.009201388888888147</ixy>
+                    <iyz>2.345854890373126e-16</iyz>
+                    <ixz>-7.991476082521071e-18</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face2_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face2.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face2_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face2.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face1">
+            <pose>8.881784197001253e-17 -2.0188818539569435e-16 -0.3528571428571427 1.811248070572428e-15 -1.6097466464142804e-16 -1.1102230259625723e-16</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666394 0.16666666666666674 0.3478571428571429 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.01841381944444053</ixx>
+                    <iyy>0.018413819444443938</iyy>
+                    <izz>0.03680555555555583</izz>
+                    <ixy>0.009201388888888778</ixy>
+                    <iyz>5.881963293985867e-16</iyz>
+                    <ixz>4.2405356915733085e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face1_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face1.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face1_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face1.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face4">
+            <pose>-0.02000462445088332 9.248518428373044e-08 0.5999999074895797 3.14159265354702 -3.361510586142836e-15 3.1415834046863114</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666385 0.16666666666666483 0.6049999999999991 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.018413819444436128</ixx>
+                    <iyy>0.01841381944444357</iyy>
+                    <izz>0.036805555555556646</izz>
+                    <ixy>0.009201388888888358</ixy>
+                    <iyz>-1.1393411228537334e-15</iyz>
+                    <ixz>-1.975422898803464e-17</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face4_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face4.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face4_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face4.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <link name="face0">
+            <pose>0.0 0.0 0.0 0.0 -0.0 0.0</pose>
+            <inertial>
+                <mass>1.325</mass>
+                <pose>0.16666666666666666 0.16666666666666669 0.005 0.0 0.0 0.0</pose>
+                <inertia>
+                    <ixx>0.018413819444444403</ixx>
+                    <iyy>0.018413819444444417</iyy>
+                    <izz>0.036805555555555494</izz>
+                    <ixy>0.00920138888888887</ixy>
+                    <iyz>0.0</iyz>
+                    <ixz>-2.168404344971009e-19</ixz>
+                </inertia>
+            </inertial>
+            <visual name="face0_visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face0.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name="face0_collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://origami_robot/meshes/face0.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+        <joint name="joint1" type="revolute">
+            <pose>-1.9093706420783104e-16 4.493880470425761e-16 0.4385714285714217 0.0 0.0 0.0</pose>
+            <parent>face1</parent>
+            <child>face2</child>
+            <axis>
+                <xyz expressed_in="__model__">0.0 1.0 0.0</xyz>
+            </axis>
+        </joint>
+        <joint name="joint2" type="revolute">
+            <pose>0.49999999999999994 -7.32150602941326e-16 0.5242857142857116 0.0 0.0 0.0</pose>
+            <parent>face2</parent>
+            <child>face3</child>
+            <axis>
+                <xyz expressed_in="__model__">-0.0 -0.707107 -0.707107</xyz>
+            </axis>
+        </joint>
+        <joint name="joint3" type="revolute">
+            <pose>3.7554825922645567e-07 -9.251474930282879e-08 0.6099999074895794 0.0 0.0 0.0</pose>
+            <parent>face3</parent>
+            <child>face4</child>
+            <axis>
+                <xyz expressed_in="__model__">9e-06 1.0 0.0</xyz>
+            </axis>
+        </joint>
+        <joint name="joint4" type="revolute">
+            <pose>0.500000375573113 2.830339368174522e-07 0.2671427646324364 0.0 0.0 0.0</pose>
+            <parent>face4</parent>
+            <child>face5</child>
+            <axis>
+                <xyz expressed_in="__model__">-0.707113 -0.7071 -0.0</xyz>
+            </axis>
+        </joint>
+        <joint name="joint5" type="revolute">
+            <pose>9.251042032555914e-08 -9.251389396352373e-08 0.18142894697682765 0.0 0.0 0.0</pose>
+            <parent>face5</parent>
+            <child>face6</child>
+            <axis>
+                <xyz expressed_in="__model__">9e-06 1.0 0.0</xyz>
+            </axis>
+        </joint>
+        <joint name="joint6" type="revolute">
+            <pose>0.5000000925138935 8.621829580677525e-16 0.09571466126211667 0.0 0.0 0.0</pose>
+            <parent>face6</parent>
+            <child>face7</child>
+            <axis>
+                <xyz expressed_in="__model__">-7e-06 -0.707107 0.707107</xyz>
+            </axis>
+        </joint>
+        <joint name="joint0" type="revolute">
+            <pose>0.4999999999999958 1.0890654615823128e-15 0.3528571428571425 0.0 0.0 0.0</pose>
+            <parent>face0</parent>
+            <child>face1</child>
+            <axis>
+                <xyz expressed_in="__model__">0.707107 -0.707107 0.0</xyz>
+            </axis>
+        </joint>
+        <joint name="joint7" type="revolute">
+            <pose>0.0 0.0 0.01 0.0 0.0 0.0</pose>
+            <parent>face7</parent>
+            <child>face0</child>
+            <axis>
+                <xyz expressed_in="__model__">0.0 1.0 0.0</xyz>
+            </axis>
+        </joint>
+    </model>
+</sdf>

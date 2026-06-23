@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bpxcire457rj1"]
+
+[ext_resource type="PackedScene" uid="uid://prb43dbfiuui" path="res://scenes/origami_robot.tscn" id="1_7i2eo"]
+
+[sub_resource type="StandardMaterial3D" id="water_mat"]
+transparency = 1
+albedo_color = Color(0.10, 0.35, 0.55, 0.70)
+roughness = 0.12
+metallic = 0.0
+
+[sub_resource type="PlaneMesh" id="water_mesh"]
+material = SubResource("water_mat")
+size = Vector2(20, 20)
+
+[node name="Ocean" type="Node3D" unique_id=581517718]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.95, 0.6, 0.0)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=972885048]
+transform = Transform3D(1, 0, 0, 0, 0.9107918, 0.41286603, 0, -0.41286603, 0.9107918, -0.08759451, 1.0224748, 0.9771488)
+
+[node name="WaterSurface" type="MeshInstance3D" parent="."]
+mesh = SubResource("water_mesh")
+
+[node name="origami_robot" parent="." unique_id=347729094 instance=ExtResource("1_7i2eo")]
+transform = Transform3D(0.9273146, -0.37428293, 1.1122141e-08, 0.22540034, 0.5584465, -0.7983308, 0.2988016, 0.74030375, 0.6022191, 0, 0.724081, 0)
