@@ -5,3 +5,5 @@
 # Generated outputs
 output/
 *.tmp
+
+.claude
