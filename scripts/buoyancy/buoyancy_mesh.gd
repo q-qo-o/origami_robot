@@ -307,10 +307,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			i += 3
 
 	# 取绝对值：法向朝向不会改变物理结果，只改变 dv 的符号
-	if absf(total_submerged_volume) > 1e-9:
+	var submerged_volume := absf(total_submerged_volume)
+	if submerged_volume > 1e-9:
 		# 加权平均得到真实浮心（世界坐标）
 		var centroid_world := weighted_centroid / total_submerged_volume
-		var submerged_volume := absf(total_submerged_volume)
 		submerged_ratio = clampf(submerged_volume / _total_mesh_volume, 0.0, 1.0)
 
 		# 阿基米德浮力：F = ρ · g · V，方向竖直向上
@@ -320,10 +320,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		_last_buoyancy_center_world = centroid_world
 
 		# state.apply_force(force, position) 的 position 参数是
-		# 相对于刚体原点的偏移（刚体局部坐标系），所以需要将世界
-		# 浮心位置变换回局部
-		var local_pos := body_xform.affine_inverse() * centroid_world
-		state.apply_force(buoyancy_force, local_pos)
+		# 世界坐标系中的位置，而非相对偏移。直接传入世界浮心。
+		state.apply_force(buoyancy_force, centroid_world)
 
 		# 基础阻尼：按浸没比例缩放速度
 		# 这是简化的指数衰减模型，物理上不严谨但稳定且易调
