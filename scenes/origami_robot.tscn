@@ -163,8 +163,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(-4.371139e-08, -1, -9.248904e-06, 1, -4.371139e-08, -4.042824e-13, 0, -9.248904e-06, 1, 0.16142395, 0.009999908, 1.585505e-06)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.17642857, -0.16666667)
 
@@ -182,8 +180,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(-9.254613e-06, -1, 1.7484555e-07, 1, -9.254613e-06, 8.0906397e-13, 8.0906397e-13, 1.7484555e-07, 1, 0.08571429, 0.010000792, 3.8184754e-18)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.09071428, -0.16666667)
 
@@ -201,8 +197,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(-1, -8.083262e-13, -9.210902e-06, 3.0835635e-15, -1, 8.742278e-08, -9.210902e-06, 8.742278e-08, 1, -0.020004625, 0.26714277, -9.249942e-08)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.26214287, -0.16666667)
 
@@ -220,8 +214,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(9.254613e-06, 1, -9.2491055e-06, -1, 9.254613e-06, -4.2799642e-11, 4.2797252e-11, 9.2491055e-06, 1, -0.5342903, -0.010004849, -4.8490892e-06)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.51928574, -0.16666667)
 
@@ -239,8 +231,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(-4.371139e-08, 1, -7.7545866e-17, -1, -4.371139e-08, 3.3896375e-24, 0, 7.7545866e-17, 1, -0.43857142, -0.01, 1.8561552e-16)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.43357143, -0.16666667)
 
@@ -258,8 +248,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(1, -1.6097467e-16, -1.110223e-16, 1.6097467e-16, 1, -1.811248e-15, 1.110223e-16, 1.811248e-15, 1, 8.881784e-17, -0.35285714, 2.0188819e-16)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.34785715, -0.16666667)
 
@@ -277,8 +265,6 @@ water_drag = 1.5
 water_angular_drag = 1.5
 transform = Transform3D(-1, -8.0860416e-13, -9.210902e-06, 3.3615106e-15, -1, 8.742278e-08, -9.210902e-06, 8.742278e-08, 1, -0.020004625, 0.5999999, -9.248519e-08)
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.605, -0.16666667)
 
@@ -295,8 +281,6 @@ buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
 mass = 1.325
-collision_layer = 1
-collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.005, -0.16666667)
 
@@ -313,7 +297,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face1")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face2")
 
 [node name="joint2" type="HingeJoint3D" parent="." unique_id=1608638301]
@@ -322,7 +305,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face2")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face3")
 
 [node name="joint3" type="HingeJoint3D" parent="." unique_id=2027118095]
@@ -331,7 +313,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face3")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face4")
 
 [node name="joint4" type="HingeJoint3D" parent="." unique_id=1865913863]
@@ -340,7 +321,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face4")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face5")
 
 [node name="joint5" type="HingeJoint3D" parent="." unique_id=1250590070]
@@ -349,7 +329,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face5")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face6")
 
 [node name="joint6" type="HingeJoint3D" parent="." unique_id=911067327]
@@ -358,7 +337,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face6")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face7")
 
 [node name="joint0" type="HingeJoint3D" parent="." unique_id=20259372]
@@ -367,7 +345,6 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face0")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face1")
 
 [node name="joint7" type="HingeJoint3D" parent="." unique_id=2007030083]
@@ -376,5 +353,4 @@ angular_limit/enable = true
 angular_limit/lower = -0.785398
 angular_limit/upper = 0.785398
 node_a = NodePath("../face7")
-exclude_nodes_from_collision = true
 node_b = NodePath("../face0")
