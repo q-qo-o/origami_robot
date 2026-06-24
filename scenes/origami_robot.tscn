@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://prb43dbfiuui"]
 
 [ext_resource type="Script" path="res://scripts/buoyancy/buoyancy_mesh.gd" id="buoyancy_script"]
+[ext_resource type="Script" path="res://scripts/robot_motion.gd" id="robot_motion"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0ox0"]
 cull_mode = 2
@@ -354,3 +355,6 @@ angular_limit/lower = -1.570796
 angular_limit/upper = 1.570796
 node_a = NodePath("../face7")
 node_b = NodePath("../face0")
+
+[node name="MotionController" type="Node3D" parent="."]
+script = ExtResource("robot_motion")
