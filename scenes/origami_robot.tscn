@@ -160,7 +160,7 @@ points = PackedVector3Array(0, 0, -0.5, 0, 0.010000001, -0.5, 0.5, 0, 0, 0, 0, 0
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(-4.371139e-08, -1, -9.248904e-06, 1, -4.371139e-08, -4.042824e-13, 0, -9.248904e-06, 1, 0.16142395, 0.009999908, 1.585505e-06)
 mass = 1.325
 center_of_mass_mode = 1
@@ -177,7 +177,7 @@ shape = SubResource("ConvexPolygonShape3D_njqe8")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(-9.254613e-06, -1, 1.7484555e-07, 1, -9.254613e-06, 8.0906397e-13, 8.0906397e-13, 1.7484555e-07, 1, 0.08571429, 0.010000792, 3.8184754e-18)
 mass = 1.325
 center_of_mass_mode = 1
@@ -194,7 +194,7 @@ shape = SubResource("ConvexPolygonShape3D_xn31r")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(-1, -8.083262e-13, -9.210902e-06, 3.0835635e-15, -1, 8.742278e-08, -9.210902e-06, 8.742278e-08, 1, -0.020004625, 0.26714277, -9.249942e-08)
 mass = 1.325
 center_of_mass_mode = 1
@@ -211,7 +211,7 @@ shape = SubResource("ConvexPolygonShape3D_niou7")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(9.254613e-06, 1, -9.2491055e-06, -1, 9.254613e-06, -4.2799642e-11, 4.2797252e-11, 9.2491055e-06, 1, -0.5342903, -0.010004849, -4.8490892e-06)
 mass = 1.325
 center_of_mass_mode = 1
@@ -228,7 +228,7 @@ shape = SubResource("ConvexPolygonShape3D_t3u8u")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(-4.371139e-08, 1, -7.7545866e-17, -1, -4.371139e-08, 3.3896375e-24, 0, 7.7545866e-17, 1, -0.43857142, -0.01, 1.8561552e-16)
 mass = 1.325
 center_of_mass_mode = 1
@@ -245,7 +245,7 @@ shape = SubResource("ConvexPolygonShape3D_xhawt")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(1, -1.6097467e-16, -1.110223e-16, 1.6097467e-16, 1, -1.811248e-15, 1.110223e-16, 1.811248e-15, 1, 8.881784e-17, -0.35285714, 2.0188819e-16)
 mass = 1.325
 center_of_mass_mode = 1
@@ -262,7 +262,7 @@ shape = SubResource("ConvexPolygonShape3D_x211a")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 transform = Transform3D(-1, -8.0860416e-13, -9.210902e-06, 3.3615106e-15, -1, 8.742278e-08, -9.210902e-06, 8.742278e-08, 1, -0.020004625, 0.5999999, -9.248519e-08)
 mass = 1.325
 center_of_mass_mode = 1
@@ -279,7 +279,7 @@ shape = SubResource("ConvexPolygonShape3D_5j0lk")
 script = ExtResource("buoyancy_script")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
-water_angular_drag = 3.0
+water_angular_drag = 1.5
 mass = 1.325
 center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.005, -0.16666667)
@@ -294,39 +294,47 @@ shape = SubResource("ConvexPolygonShape3D_pfimj")
 [node name="joint1" type="HingeJoint3D" parent="." unique_id=888133071]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, -0.010000019, -2.2976311e-16)
 node_a = NodePath("../face1")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face2")
 
 [node name="joint2" type="HingeJoint3D" parent="." unique_id=1608638301]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, -0.70710677, 0, 0.70710677, 0.7071068, -0.009999931, -0.51, 1.0595613e-10)
 node_a = NodePath("../face2")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face3")
 
 [node name="joint3" type="HingeJoint3D" parent="." unique_id=2027118095]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.020005, -0.00999999, 5.335398e-08)
 node_a = NodePath("../face3")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face4")
 
 [node name="joint4" type="HingeJoint3D" parent="." unique_id=1865913863]
 transform = Transform3D(0.7071003, 0, -0.70711327, 0, 1, 0, 0.70711327, 0, 0.7071003, -0.520005, 0, -4.957633e-06)
 node_a = NodePath("../face4")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face5")
 
 [node name="joint5" type="HingeJoint3D" parent="." unique_id=1250590070]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.020005003, 0.009999992, 0)
 node_a = NodePath("../face5")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face6")
 
 [node name="joint6" type="HingeJoint3D" parent="." unique_id=911067327]
 transform = Transform3D(1, 2.8994934e-06, -6.9999974e-06, 2.8994934e-06, 0.7071068, 0.70710677, 6.9999974e-06, -0.70710677, 0.7071068, -0.010004997, 0.51, 1.6735687e-08)
 node_a = NodePath("../face6")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face7")
 
 [node name="joint0" type="HingeJoint3D" parent="." unique_id=20259372]
 transform = Transform3D(0.7071068, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071068, 0.5, 0, -1.9255425e-16)
 node_a = NodePath("../face0")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face1")
 
 [node name="joint7" type="HingeJoint3D" parent="." unique_id=2007030083]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0.01, 0)
 node_a = NodePath("../face7")
+exclude_nodes_from_collision = true
 node_b = NodePath("../face0")
