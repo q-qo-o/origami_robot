@@ -24,6 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9107918, 0.41286603, 0, -0.41286603, 0.910
 script = ExtResource("2_0")
 
 [node name="WaterSurface" type="MeshInstance3D" parent="." unique_id=76097607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012190342, 0.0020660758, 0.004458368)
 mesh = SubResource("water_mesh")
 
 [node name="origami_robot" parent="." unique_id=347729094 instance=ExtResource("1_7i2eo")]

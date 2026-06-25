@@ -123,6 +123,117 @@ var _manual_labels: Array[Label] = []        # 8 个标签
 var _integral_terms: Array[float] = []       # 各关节误差积分累积（rad·s）
 var _prev_errors: Array[float] = []          # 上一帧误差（用于抗饱和判断）
 
+# 循环预设模式
+var _cycle_preset_mode: bool = false         # 是否启用循环预设
+var _cycle_preset_timer: float = 0.0         # 循环计时器
+var _cycle_preset_is_x: bool = true          # 当前循环目标是否为 X 形
+
+# ============================================================================
+# 状态空间模态切换
+# ============================================================================
+
+## 状态空间：8个折痕二面角构成的 ℝ⁸ 向量
+## 状态向量 q = [δ₀, δ₁, δ₂, δ₃, δ₄, δ₅, δ₆, δ₇]ᵀ
+##
+## 标准模态：
+## - 默认(完全展开): q_default = [0, 0, 0, 0, 0, 0, 0, 0]ᵀ
+## - X形折叠:       q_x      = [0, −π/2, 0, −π/2, 0, −π/2, 0, −π/2]ᵀ
+
+## 模态切换状态
+var _transition_active: bool = false        # 是否正在进行模态过渡
+var _transition_start_q: Array[float] = []  # 过渡起始状态（8个角度）
+var _transition_target_q: Array[float] = [] # 过渡目标状态
+var _transition_t: float = 0.0              # 当前过渡时间（秒）
+var _transition_T: float = 3.0              # 过渡总时长（秒）
+
+
+## 默认状态（完全展开，所有二面角为0）
+static func _state_default() -> Array[float]:
+	return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+
+## X形折叠状态（从折痕−180°，主折痕−90°）
+## 注意：−180°与+180°在物理上等价（wrap后统一），对应完全翻转
+static func _state_x_fold() -> Array[float]:
+	var q: Array[float] = []
+	q.resize(8)
+	for i in range(8):
+		q[i] = -PI if (i % 2 == 0) else -PI / 2.0
+	return q
+
+
+## 路径归一化参数 s(t) = t/T - sin(2πt/T)/(2π)，ease-in-out 启停
+## ṡ(t) = (1 - cos(2πt/T)) / T
+static func _path_s(t: float, T: float) -> float:
+	if t <= 0.0:
+		return 0.0
+	if t >= T:
+		return 1.0
+	return t / T - sin(2.0 * PI * t / T) / (2.0 * PI)
+
+
+static func _path_s_dot(t: float, T: float) -> float:
+	if t <= 0.0 or t >= T:
+		return 0.0
+	return (1.0 - cos(2.0 * PI * t / T)) / T
+
+
+## 启动模态过渡：从当前状态平滑插值到目标状态
+func start_transition(target_q: Array[float], duration: float = 3.0) -> void:
+	_transition_start_q.resize(8)
+	_transition_target_q.resize(8)
+	for i in range(8):
+		if manual_mode and _initialized and i < len(_manual_targets):
+			# 手动模式：以用户 Slider 上看到的 _manual_targets 作为起点。
+			# 物理实际状态（previous_deltas）与 _manual_targets 之间常有跟踪
+			# 误差；若用物理测量值作起点，Slider 会跳变到测量值，用户体验差。
+			_transition_start_q[i] = _manual_targets[i]
+		elif _initialized and i < len(previous_deltas):
+			# 自动模式：以物理测量值作为起点
+			_transition_start_q[i] = previous_deltas[i]
+		else:
+			_transition_start_q[i] = initial_deltas[i]
+		_transition_target_q[i] = target_q[i]
+	_transition_t = 0.0
+	_transition_T = maxf(duration, 0.5)
+	_transition_active = true
+	_clear_integral()
+	print("[OrigamiMotion] Start transition, duration=%.1fs" % _transition_T)
+	print("[OrigamiMotion]   from: ", _format_angles(_transition_start_q))
+	print("[OrigamiMotion]   to:   ", _format_angles(_transition_target_q))
+
+
+## 最短角度差：结果在 [−π, π]，边界（|diff|=π）时优先向 0 靠拢
+static func _angle_diff(to: float, from: float) -> float:
+	var diff = wrapf(to - from, -PI, PI)
+	# 当 |diff| 恰好为 π 时，wrapf 可能返回 −π 或 +π（取决于实现）。
+	# 此时选择让 from + diff 向 0 靠近的方向，路径更自然。
+	if absf(absf(diff) - PI) < 1e-6:
+		if from < 0:
+			diff = PI
+		elif from > 0:
+			diff = -PI
+	return diff
+
+
+## 获取路径插值目标状态（不修改 _transition_t），返回 {"angles": [...], "velocities": [...]}
+func _get_transition_target() -> Dictionary:
+	var s := _path_s(_transition_t, _transition_T)
+	var s_dot := _path_s_dot(_transition_t, _transition_T)
+
+	var target_angles: Array[float] = []
+	target_angles.resize(8)
+	var target_velocities: Array[float] = []
+	target_velocities.resize(8)
+	for i in range(8):
+		var delta_q = _angle_diff(_transition_target_q[i], _transition_start_q[i])
+		# 位置：q(t) = q_A + shortest_diff(q_B, q_A) * s(t)，结果 wrap 到 [−π, π]
+		target_angles[i] = wrapf(_transition_start_q[i] + delta_q * s, -PI, PI)
+		# 路径速度：q̇(t) = shortest_diff * ṡ(t)
+		target_velocities[i] = delta_q * s_dot
+
+	return {"angles": target_angles, "velocities": target_velocities}
+
 
 # ============================================================================
 # 生命周期
@@ -201,7 +312,39 @@ func _physics_process(delta):
 		if body_a:
 			joint.global_transform = body_a.global_transform * _joint_local_offsets[i]
 
-	# 阶段三：所有 8 个关节统一 PD 控制
+	# 阶段三：循环预设模式 — 使用模态过渡平滑切换
+	if _cycle_preset_mode and not _transition_active:
+		_cycle_preset_timer += delta
+		if _cycle_preset_timer >= 5.0:
+			_cycle_preset_timer = 0.0
+			_cycle_preset_is_x = not _cycle_preset_is_x
+			var target = _state_x_fold() if _cycle_preset_is_x else _state_default()
+			start_transition(target, 2.0)
+
+	# 阶段四：统一目标值更新 — _manual_targets 是 PID 的唯一目标来源
+	# 过渡模式：_manual_targets 跟随路径规划值
+	# 自动模式：_manual_targets 跟随周期性规划值
+	# 手动模式：_manual_targets 保持用户 Slider 设定值
+	var path_velocities: Array[float] = []
+	path_velocities.resize(len(joints))
+	path_velocities.fill(0.0)
+	if _transition_active:
+		var path_result = _get_transition_target()
+		var transition_angles: Array[float] = path_result["angles"]
+		var transition_velocities: Array[float] = path_result["velocities"]
+		for i in range(len(joints)):
+			# 保证 _manual_targets 始终在 [−π, π]，避免 Slider 显示 −360° 等异常值
+			_manual_targets[i] = wrapf(transition_angles[i], -PI, PI)
+			path_velocities[i] = transition_velocities[i]
+			_update_slider_from_target(i)
+	elif not manual_mode:
+		# 自动模式：将周期性目标写入 _manual_targets（统一来源）
+		for i in range(len(joints)):
+			_manual_targets[i] = wrapf(_compute_auto_target_delta(i, elapsed_time), -PI, PI)
+			_update_slider_from_target(i)
+
+	# 阶段五：所有 8 个关节统一 PD + 前馈控制
+	# PID 目标永远是 _manual_targets[i]，来源不再分支
 	elapsed_time += delta
 
 	for i in range(len(joints)):
@@ -217,13 +360,9 @@ func _physics_process(delta):
 		var delta_dot = delta_diff / delta
 		previous_deltas[i] = current_delta
 
-		var target_delta: float
-		if manual_mode:
-			# 手动模式：Slider 直接设定目标
-			target_delta = _manual_targets[i]
-		else:
-			# 自动模式：周期性运动规划
-			target_delta = _compute_auto_target_delta(i, elapsed_time)
+		# PID 目标：统一来自 _manual_targets（手动/自动/过渡三种模式在此统一）
+		var target_delta: float = _manual_targets[i]
+		var path_velocity: float = path_velocities[i]
 
 		if not is_finite(target_delta):
 			continue
@@ -243,11 +382,19 @@ func _physics_process(delta):
 			_integral_terms[i] += error * delta
 		_integral_terms[i] = clampf(_integral_terms[i], -ki_max, ki_max)
 
-		var velocity_target = _velocity_signs[i] * (kp * error + ki * _integral_terms[i] - kd * delta_dot)
+		# PD 反馈 + 路径速度前馈：ω = sign·(kp·e + ki·∫e − kd·δ̇ + δ̇_path)
+		var velocity_target = _velocity_signs[i] * (kp * error + ki * _integral_terms[i] - kd * delta_dot + path_velocity)
 		velocity_target = clampf(velocity_target, -v_max, v_max)
 
 		_prev_errors[i] = error
 		joint.set("motor/target_velocity", velocity_target)
+
+	# 阶段六：累加过渡时间并检测完成
+	if _transition_active:
+		_transition_t += delta
+		if _transition_t >= _transition_T:
+			_transition_active = false
+			print("[OrigamiMotion] Transition completed")
 
 
 # ============================================================================
@@ -328,9 +475,14 @@ func _create_manual_ui():
 	reset_btn.pressed.connect(_on_reset_pressed)
 	btn_hbox.add_child(reset_btn)
 
+	var preset_btn = Button.new()
+	preset_btn.text = "X形折叠"
+	preset_btn.pressed.connect(_on_preset_pressed)
+	btn_hbox.add_child(preset_btn)
+
 	var auto_btn = Button.new()
-	auto_btn.text = "恢复自动"
-	auto_btn.pressed.connect(_on_auto_pressed)
+	auto_btn.text = "循环模式"
+	auto_btn.pressed.connect(_on_cycle_preset_pressed)
 	btn_hbox.add_child(auto_btn)
 
 
@@ -345,7 +497,8 @@ func _toggle_manual_ui(show_ui: bool):
 	# 切换到手动模式时，同步 Slider 为当前实际角度
 	if show_ui and _initialized:
 		for i in range(len(joints)):
-			_manual_targets[i] = previous_deltas[i] if i < len(previous_deltas) else initial_deltas[i]
+			var v = previous_deltas[i] if i < len(previous_deltas) else initial_deltas[i]
+			_manual_targets[i] = wrapf(v, -PI, PI)
 			_update_slider_from_target(i)
 
 
@@ -366,8 +519,29 @@ func _on_slider_changed(value: float, joint_index: int):
 
 
 func _on_reset_pressed():
+	_cycle_preset_mode = false
+	start_transition(_state_default(), 3.0)
+
+
+func _on_preset_pressed():
+	_cycle_preset_mode = false
+	start_transition(_state_x_fold(), 3.0)
+
+
+func _on_cycle_preset_pressed():
+	_cycle_preset_mode = true
+	_cycle_preset_timer = 0.0
+	_cycle_preset_is_x = true
+	start_transition(_state_x_fold(), 2.0)
+
+
+## 应用预设：is_x=true → X形折叠，is_x=false → 默认展开(0°)
+func _apply_preset(is_x: bool) -> void:
 	for i in range(len(joints)):
-		_manual_targets[i] = 0.0
+		if is_x:
+			_manual_targets[i] = deg_to_rad(-180.0) if (i % 2 == 0) else deg_to_rad(-90.0)
+		else:
+			_manual_targets[i] = 0.0
 		_integral_terms[i] = 0.0
 		_prev_errors[i] = 0.0
 		_update_slider_from_target(i)
