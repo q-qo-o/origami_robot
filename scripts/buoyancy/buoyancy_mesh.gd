@@ -125,9 +125,9 @@ var _mesh_triangles: Array = []
 ## 所有 mesh 的总体积（用于 submerged_ratio 归一化）
 var _total_mesh_volume: float = 0.0
 
-## 调试用：最近一帧的浮心和浮力大小
-var _last_buoyancy_center_world: Vector3
-var _last_total_force: float = 0.0
+## 最近一帧的浮心和浮力大小（公开，供外部可视化脚本读取）
+var last_buoyancy_center_world: Vector3
+var last_total_force: float = 0.0
 
 
 # ============================================================
@@ -316,8 +316,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		# 阿基米德浮力：F = ρ · g · V，方向竖直向上
 		# 乘以 buoyancy_multiplier 以补偿薄壳外廓排开体积
 		var buoyancy_force := Vector3.UP * submerged_volume * fluid_density * _gravity * buoyancy_multiplier
-		_last_total_force = buoyancy_force.length()
-		_last_buoyancy_center_world = centroid_world
+		last_total_force = buoyancy_force.length()
+		last_buoyancy_center_world = centroid_world
 
 		# state.apply_force(force, position) 的 position 参数是
 		# 世界坐标系中的位置，而非相对偏移。直接传入世界浮心。
@@ -333,7 +333,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	else:
 		# 完全出水
 		submerged_ratio = 0.0
-		_last_total_force = 0.0
+		last_total_force = 0.0
 
 	# 更新公开状态供外部读取
 	vertical_velocity = state.linear_velocity.y

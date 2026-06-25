@@ -186,9 +186,9 @@ func _physics_process(delta):
 			_initialized = true
 			print("[OrigamiMotion] Initial dihedral angles: ", _format_angles(initial_deltas))
 			print("[OrigamiMotion] Velocity signs: ", _velocity_signs)
-			# 初始化手动目标为当前角度
+			# 初始化手动目标为 0（完全展开）
 			for i in range(len(joints)):
-				_manual_targets[i] = initial_deltas[i]
+				_manual_targets[i] = 0.0
 				_update_slider_from_target(i)
 		return
 
@@ -367,7 +367,7 @@ func _on_slider_changed(value: float, joint_index: int):
 
 func _on_reset_pressed():
 	for i in range(len(joints)):
-		_manual_targets[i] = initial_deltas[i]
+		_manual_targets[i] = 0.0
 		_integral_terms[i] = 0.0
 		_prev_errors[i] = 0.0
 		_update_slider_from_target(i)
