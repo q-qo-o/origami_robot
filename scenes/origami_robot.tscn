@@ -173,6 +173,7 @@ mesh = SubResource("ArrayMesh_ke10t")
 
 [node name="face6_collision" type="CollisionShape3D" parent="face6" unique_id=1864292782]
 shape = SubResource("ConvexPolygonShape3D_njqe8")
+disabled = true
 
 [node name="face7" type="RigidBody3D" parent="." unique_id=246406852]
 script = ExtResource("buoyancy_script")
@@ -190,6 +191,7 @@ mesh = SubResource("ArrayMesh_yu0fi")
 
 [node name="face7_collision" type="CollisionShape3D" parent="face7" unique_id=361556802]
 shape = SubResource("ConvexPolygonShape3D_xn31r")
+disabled = true
 
 [node name="face5" type="RigidBody3D" parent="." unique_id=2037208283]
 script = ExtResource("buoyancy_script")
@@ -207,6 +209,7 @@ mesh = SubResource("ArrayMesh_6it43")
 
 [node name="face5_collision" type="CollisionShape3D" parent="face5" unique_id=449420052]
 shape = SubResource("ConvexPolygonShape3D_niou7")
+disabled = true
 
 [node name="face3" type="RigidBody3D" parent="." unique_id=1872131419]
 script = ExtResource("buoyancy_script")
@@ -224,6 +227,7 @@ mesh = SubResource("ArrayMesh_p2kwk")
 
 [node name="face3_collision" type="CollisionShape3D" parent="face3" unique_id=1214230655]
 shape = SubResource("ConvexPolygonShape3D_t3u8u")
+disabled = true
 
 [node name="face2" type="RigidBody3D" parent="." unique_id=1457562950]
 script = ExtResource("buoyancy_script")
@@ -241,6 +245,7 @@ mesh = SubResource("ArrayMesh_y3adx")
 
 [node name="face2_collision" type="CollisionShape3D" parent="face2" unique_id=2117856804]
 shape = SubResource("ConvexPolygonShape3D_xhawt")
+disabled = true
 
 [node name="face1" type="RigidBody3D" parent="." unique_id=864587737]
 script = ExtResource("buoyancy_script")
@@ -258,6 +263,7 @@ mesh = SubResource("ArrayMesh_dnguk")
 
 [node name="face1_collision" type="CollisionShape3D" parent="face1" unique_id=1776736941]
 shape = SubResource("ConvexPolygonShape3D_x211a")
+disabled = true
 
 [node name="face4" type="RigidBody3D" parent="." unique_id=1984966369]
 script = ExtResource("buoyancy_script")
@@ -275,6 +281,7 @@ mesh = SubResource("ArrayMesh_l6h23")
 
 [node name="face4_collision" type="CollisionShape3D" parent="face4" unique_id=1288520698]
 shape = SubResource("ConvexPolygonShape3D_5j0lk")
+disabled = true
 
 [node name="face0" type="RigidBody3D" parent="." unique_id=1383969810]
 script = ExtResource("buoyancy_script")
@@ -291,10 +298,11 @@ mesh = SubResource("ArrayMesh_owr44")
 
 [node name="face0_collision" type="CollisionShape3D" parent="face0" unique_id=129485059]
 shape = SubResource("ConvexPolygonShape3D_pfimj")
+disabled = true
 
 [node name="joint1" type="HingeJoint3D" parent="." unique_id=888133071]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, -0.010000019, -2.2976311e-16)
-angular_limit/enable = true
+angular_limit/enable = false
 angular_limit/lower = -1.570796
 angular_limit/upper = 1.570796
 node_a = NodePath("../face1")
@@ -302,15 +310,15 @@ node_b = NodePath("../face2")
 
 [node name="joint2" type="HingeJoint3D" parent="." unique_id=1608638301]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, -0.70710677, 0, 0.70710677, 0.7071068, -0.009999931, -0.51, 1.0595613e-10)
-angular_limit/enable = true
-angular_limit/lower = -1.570796
-angular_limit/upper = 1.570796
+angular_limit/enable = false
+angular_limit/lower = 0.0
+angular_limit/upper = 3.141593
 node_a = NodePath("../face2")
 node_b = NodePath("../face3")
 
 [node name="joint3" type="HingeJoint3D" parent="." unique_id=2027118095]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.020005, -0.00999999, 5.335398e-08)
-angular_limit/enable = true
+angular_limit/enable = false
 angular_limit/lower = -1.570796
 angular_limit/upper = 1.570796
 node_a = NodePath("../face3")
@@ -318,15 +326,15 @@ node_b = NodePath("../face4")
 
 [node name="joint4" type="HingeJoint3D" parent="." unique_id=1865913863]
 transform = Transform3D(0.7071003, 0, -0.70711327, 0, 1, 0, 0.70711327, 0, 0.7071003, -0.520005, 0, -4.957633e-06)
-angular_limit/enable = true
-angular_limit/lower = -1.570796
-angular_limit/upper = 1.570796
+angular_limit/enable = false
+angular_limit/lower = 0.0
+angular_limit/upper = 3.141593
 node_a = NodePath("../face4")
 node_b = NodePath("../face5")
 
 [node name="joint5" type="HingeJoint3D" parent="." unique_id=1250590070]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.020005003, 0.009999992, 0)
-angular_limit/enable = true
+angular_limit/enable = false
 angular_limit/lower = -1.570796
 angular_limit/upper = 1.570796
 node_a = NodePath("../face5")
@@ -334,23 +342,23 @@ node_b = NodePath("../face6")
 
 [node name="joint6" type="HingeJoint3D" parent="." unique_id=911067327]
 transform = Transform3D(1, 2.8994934e-06, -6.9999974e-06, 2.8994934e-06, 0.7071068, 0.70710677, 6.9999974e-06, -0.70710677, 0.7071068, -0.010004997, 0.51, 1.6735687e-08)
-angular_limit/enable = true
-angular_limit/lower = -1.570796
-angular_limit/upper = 1.570796
+angular_limit/enable = false
+angular_limit/lower = 0.0
+angular_limit/upper = 3.141593
 node_a = NodePath("../face6")
 node_b = NodePath("../face7")
 
 [node name="joint0" type="HingeJoint3D" parent="." unique_id=20259372]
 transform = Transform3D(0.7071068, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071068, 0.5, 0, -1.9255425e-16)
-angular_limit/enable = true
-angular_limit/lower = -1.570796
-angular_limit/upper = 1.570796
+angular_limit/enable = false
+angular_limit/lower = 0.0
+angular_limit/upper = 3.141593
 node_a = NodePath("../face0")
 node_b = NodePath("../face1")
 
 [node name="joint7" type="HingeJoint3D" parent="." unique_id=2007030083]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0.01, 0)
-angular_limit/enable = true
+angular_limit/enable = false
 angular_limit/lower = -1.570796
 angular_limit/upper = 1.570796
 node_a = NodePath("../face7")
