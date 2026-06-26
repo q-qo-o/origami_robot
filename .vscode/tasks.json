@@ -1,0 +1,78 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C# (dotnet)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/origami_robot.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent",
+                "clear": true,
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build C# (Godot Editor)",
+            "type": "shell",
+            "command": "C:/Users/qdsyq/MyApps/Godot/Godot_v4.6.3-stable_mono_win64_console.exe",
+            "args": [
+                "--headless",
+                "--build-solutions",
+                "--quit",
+                "--path",
+                "${workspaceFolder}"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "clear": true,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Godot Headless Import",
+            "type": "shell",
+            "command": "C:/Users/qdsyq/MyApps/Godot/Godot_v4.6.3-stable_mono_win64_console.exe",
+            "args": [
+                "--headless",
+                "--import",
+                "--path",
+                "${workspaceFolder}"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "silent",
+                "clear": true,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Project (Godot)",
+            "type": "shell",
+            "command": "C:/Users/qdsyq/MyApps/Godot/Godot_v4.6.3-stable_mono_win64_console.exe",
+            "args": [
+                "--path",
+                "${workspaceFolder}"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

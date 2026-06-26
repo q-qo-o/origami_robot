@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://prb43dbfiuui"]
 
-[ext_resource type="Script" path="res://scripts/buoyancy/buoyancy_mesh.gd" id="buoyancy_script"]
+[ext_resource type="CSharpScript" path="res://scripts/buoyancy/BuoyancyMesh.cs" id="buoyancy_cs"]
 [ext_resource type="Script" path="res://scripts/robot_motion.gd" id="robot_motion"]
 [ext_resource type="Script" path="res://scripts/robot_center_visualizer.gd" id="center_visualizer"]
 
@@ -159,7 +159,7 @@ points = PackedVector3Array(0, 0, -0.5, 0, 0.010000001, -0.5, 0.5, 0, 0, 0, 0, 0
 [node name="origami_robot" type="Node3D" unique_id=347729094]
 
 [node name="face6" type="RigidBody3D" parent="." unique_id=1412095508]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -177,7 +177,7 @@ shape = SubResource("ConvexPolygonShape3D_njqe8")
 disabled = true
 
 [node name="face7" type="RigidBody3D" parent="." unique_id=246406852]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -195,7 +195,7 @@ shape = SubResource("ConvexPolygonShape3D_xn31r")
 disabled = true
 
 [node name="face5" type="RigidBody3D" parent="." unique_id=2037208283]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -213,7 +213,7 @@ shape = SubResource("ConvexPolygonShape3D_niou7")
 disabled = true
 
 [node name="face3" type="RigidBody3D" parent="." unique_id=1872131419]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -231,7 +231,7 @@ shape = SubResource("ConvexPolygonShape3D_t3u8u")
 disabled = true
 
 [node name="face2" type="RigidBody3D" parent="." unique_id=1457562950]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -249,7 +249,7 @@ shape = SubResource("ConvexPolygonShape3D_xhawt")
 disabled = true
 
 [node name="face1" type="RigidBody3D" parent="." unique_id=864587737]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -267,7 +267,7 @@ shape = SubResource("ConvexPolygonShape3D_x211a")
 disabled = true
 
 [node name="face4" type="RigidBody3D" parent="." unique_id=1984966369]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5
@@ -285,7 +285,7 @@ shape = SubResource("ConvexPolygonShape3D_5j0lk")
 disabled = true
 
 [node name="face0" type="RigidBody3D" parent="." unique_id=1383969810]
-script = ExtResource("buoyancy_script")
+script = ExtResource("buoyancy_cs")
 buoyancy_multiplier = 2.0
 water_drag = 1.5
 water_angular_drag = 1.5

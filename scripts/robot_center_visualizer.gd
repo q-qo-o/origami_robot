@@ -69,8 +69,8 @@ func _process(_delta: float) -> void:
 
 		# ---- 浮心 ----
 		# buoyancy_mesh.gd 中的公开变量
-		var buoyancy_force: float = face.get("last_total_force")
-		var buoyancy_center: Vector3 = face.get("last_buoyancy_center_world")
+		var buoyancy_force: float = face.get("LastTotalForce")
+		var buoyancy_center: Vector3 = face.get("LastBuoyancyCenterWorld")
 		if buoyancy_force > 1e-6:
 			total_buoyancy_force += buoyancy_force
 			weighted_cob += buoyancy_center * buoyancy_force
