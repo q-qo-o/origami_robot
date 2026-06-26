@@ -1,14 +1,15 @@
 [gd_scene format=4 uid="uid://prb43dbfiuui"]
 
 [ext_resource type="CSharpScript" path="res://scripts/buoyancy/BuoyancyMesh.cs" id="buoyancy_cs"]
+[ext_resource type="Shader" path="res://scripts/face_material.gdshader" id="face_shader"]
 [ext_resource type="Script" path="res://scripts/robot_motion.gd" id="robot_motion"]
 [ext_resource type="Script" path="res://scripts/robot_center_visualizer.gd" id="center_visualizer"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0ox0"]
-cull_mode = 2
-albedo_color = Color(0.9, 0.25, 0.25, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0ox0"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.9, 0.25, 0.25, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ke10t"]
 _surfaces = [{
@@ -23,11 +24,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_njqe8"]
 points = PackedVector3Array(0, 0.17142858, -0.5, 0, 0.18142858, -0.5, 0.5, 0.17142858, 0, 0, 0.17142858, 0, 0, 0.18142858, 0, 0.5, 0.18142858, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wk0yb"]
-cull_mode = 2
-albedo_color = Color(0.25, 0.7, 0.25, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wk0yb"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.25, 0.7, 0.25, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yu0fi"]
 _surfaces = [{
@@ -42,11 +43,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xn31r"]
 points = PackedVector3Array(0, 0.08571429, -0.5, 0, 0.09571429, -0.5, 0.5, 0.08571429, 0, 0, 0.08571429, 0, 0, 0.09571429, 0, 0.5, 0.09571429, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88xxh"]
-cull_mode = 2
-albedo_color = Color(0.25, 0.25, 0.9, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88xxh"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.25, 0.25, 0.9, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6it43"]
 _surfaces = [{
@@ -61,11 +62,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_niou7"]
 points = PackedVector3Array(0, 0.25714287, -0.5, 0, 0.26714286, -0.5, 0.5, 0.25714287, 0, 0, 0.25714287, 0, 0, 0.26714286, 0, 0.5, 0.26714286, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nb42f"]
-cull_mode = 2
-albedo_color = Color(0.9, 0.9, 0.25, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nb42f"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.9, 0.9, 0.25, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_p2kwk"]
 _surfaces = [{
@@ -80,11 +81,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t3u8u"]
 points = PackedVector3Array(0, 0.51428574, -0.5, 0, 0.52428573, -0.5, 0.5, 0.51428574, 0, 0, 0.51428574, 0, 0, 0.52428573, 0, 0.5, 0.52428573, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik2re"]
-cull_mode = 2
-albedo_color = Color(0.9, 0.25, 0.9, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ik2re"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.9, 0.25, 0.9, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y3adx"]
 _surfaces = [{
@@ -99,11 +100,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xhawt"]
 points = PackedVector3Array(0, 0.42857146, -0.5, 0, 0.43857145, -0.5, 0.5, 0.42857146, 0, 0, 0.42857146, 0, 0, 0.43857145, 0, 0.5, 0.43857145, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0iwvv"]
-cull_mode = 2
-albedo_color = Color(0.25, 0.9, 0.9, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0iwvv"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.25, 0.9, 0.9, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dnguk"]
 _surfaces = [{
@@ -118,11 +119,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x211a"]
 points = PackedVector3Array(0, 0.34285715, -0.5, 0, 0.35285717, -0.5, 0.5, 0.34285715, 0, 0, 0.34285715, 0, 0, 0.35285717, 0, 0.5, 0.35285717, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7n1d"]
-cull_mode = 2
-albedo_color = Color(0.95, 0.55, 0.2, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c7n1d"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.95, 0.55, 0.2, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l6h23"]
 _surfaces = [{
@@ -137,11 +138,11 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5j0lk"]
 points = PackedVector3Array(0, 0.6, -0.5, 0, 0.61, -0.5, 0.5, 0.6, 0, 0, 0.6, 0, 0, 0.61, 0, 0.5, 0.61, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5d3"]
-cull_mode = 2
-albedo_color = Color(0.6, 0.6, 0.6, 1)
-metallic = 0.1
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qm5d3"]
+shader = ExtResource("face_shader")
+shader_parameter/albedo = Color(0.6, 0.6, 0.6, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.6
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_owr44"]
 _surfaces = [{
@@ -169,7 +170,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.17642857, -0.16666667)
 
 [node name="face6_visual" type="MeshInstance3D" parent="face6" unique_id=1059840318]
-material_override = SubResource("StandardMaterial3D_a0ox0")
+material_override = SubResource("ShaderMaterial_a0ox0")
 mesh = SubResource("ArrayMesh_ke10t")
 
 [node name="face6_collision" type="CollisionShape3D" parent="face6" unique_id=1864292782]
@@ -187,7 +188,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.09071428, -0.16666667)
 
 [node name="face7_visual" type="MeshInstance3D" parent="face7" unique_id=1784816915]
-material_override = SubResource("StandardMaterial3D_wk0yb")
+material_override = SubResource("ShaderMaterial_wk0yb")
 mesh = SubResource("ArrayMesh_yu0fi")
 
 [node name="face7_collision" type="CollisionShape3D" parent="face7" unique_id=361556802]
@@ -205,7 +206,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.26214287, -0.16666667)
 
 [node name="face5_visual" type="MeshInstance3D" parent="face5" unique_id=1058518906]
-material_override = SubResource("StandardMaterial3D_88xxh")
+material_override = SubResource("ShaderMaterial_88xxh")
 mesh = SubResource("ArrayMesh_6it43")
 
 [node name="face5_collision" type="CollisionShape3D" parent="face5" unique_id=449420052]
@@ -223,7 +224,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.51928574, -0.16666667)
 
 [node name="face3_visual" type="MeshInstance3D" parent="face3" unique_id=133528990]
-material_override = SubResource("StandardMaterial3D_nb42f")
+material_override = SubResource("ShaderMaterial_nb42f")
 mesh = SubResource("ArrayMesh_p2kwk")
 
 [node name="face3_collision" type="CollisionShape3D" parent="face3" unique_id=1214230655]
@@ -241,7 +242,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.43357143, -0.16666667)
 
 [node name="face2_visual" type="MeshInstance3D" parent="face2" unique_id=871570883]
-material_override = SubResource("StandardMaterial3D_ik2re")
+material_override = SubResource("ShaderMaterial_ik2re")
 mesh = SubResource("ArrayMesh_y3adx")
 
 [node name="face2_collision" type="CollisionShape3D" parent="face2" unique_id=2117856804]
@@ -259,7 +260,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.34785715, -0.16666667)
 
 [node name="face1_visual" type="MeshInstance3D" parent="face1" unique_id=501878318]
-material_override = SubResource("StandardMaterial3D_0iwvv")
+material_override = SubResource("ShaderMaterial_0iwvv")
 mesh = SubResource("ArrayMesh_dnguk")
 
 [node name="face1_collision" type="CollisionShape3D" parent="face1" unique_id=1776736941]
@@ -277,7 +278,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.605, -0.16666667)
 
 [node name="face4_visual" type="MeshInstance3D" parent="face4" unique_id=430416079]
-material_override = SubResource("StandardMaterial3D_c7n1d")
+material_override = SubResource("ShaderMaterial_c7n1d")
 mesh = SubResource("ArrayMesh_l6h23")
 
 [node name="face4_collision" type="CollisionShape3D" parent="face4" unique_id=1288520698]
@@ -294,7 +295,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0.16666667, 0.005, -0.16666667)
 
 [node name="face0_visual" type="MeshInstance3D" parent="face0" unique_id=874825106]
-material_override = SubResource("StandardMaterial3D_qm5d3")
+material_override = SubResource("ShaderMaterial_qm5d3")
 mesh = SubResource("ArrayMesh_owr44")
 
 [node name="face0_collision" type="CollisionShape3D" parent="face0" unique_id=129485059]

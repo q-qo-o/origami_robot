@@ -2,6 +2,7 @@ extends Camera3D
 
 ## Camera3D 轨道控制器
 ## 滚轮缩放 / 中键拖拽平移 / Shift+中键拖拽旋转
+## 新增：水下滤镜切换（CanvasLayer + ColorRect + shader）
 
 @export_group("Speed")
 @export var zoom_speed: float = 0.12
@@ -12,20 +13,80 @@ extends Camera3D
 @export var min_distance: float = 0.3
 @export var max_distance: float = 20.0
 
+@export_group("水下效果")
+## 水面高度（y = 0），相机低于此高度时触发水下滤镜
+@export var water_level: float = 0.0
+## 水下滤镜淡入淡出速度
+@export var filter_fade_speed: float = 3.0
+## 是否启用水下滤镜
+@export var enable_underwater_filter: bool = true
+
 var _pivot: Vector3 = Vector3.ZERO
 var _distance: float = 2.0
 var _yaw: float = 0.0
 var _pitch: float = 0.4
 var _initialised: bool = false
 
-var _rotate_pivot: Vector3 = Vector3.ZERO    # Shift+中键拖拽时使用的旋转中心
-var _is_rotating: bool = false               # 是否正在旋转拖拽中
+var _rotate_pivot: Vector3 = Vector3.ZERO
+var _is_rotating: bool = false
+
+# ============================================================
+# 水下滤镜状态
+# ============================================================
+
+var _filter_rect: ColorRect
+var _filter_intensity: float = 0.0   # 0 = 关闭, 1 = 全开
 
 
 func _ready():
-	# 从当前相机位置反推初始轨道参数
 	_reconstruct_orbit()
+	_init_underwater_filter()
 
+
+func _init_underwater_filter() -> void:
+	if not enable_underwater_filter:
+		return
+
+	var root := get_tree().current_scene
+	if root == null:
+		return
+
+	var canvas_layer := root.get_node_or_null("UnderwaterFilter")
+	if canvas_layer == null:
+		push_warning("[CameraController] UnderwaterFilter not found, underwater filter disabled")
+		enable_underwater_filter = false
+		return
+
+	_filter_rect = canvas_layer.get_node_or_null("ColorRect")
+	if _filter_rect == null:
+		push_warning("[CameraController] UnderwaterFilter/ColorRect not found")
+		enable_underwater_filter = false
+		return
+
+	# 初始关闭滤镜
+	_filter_rect.visible = false
+	_filter_intensity = 0.0
+	_filter_rect.material.set_shader_parameter("intensity", 0.0)
+
+
+func _process(delta: float) -> void:
+	if not enable_underwater_filter or _filter_rect == null:
+		return
+
+	var is_underwater := global_position.y < water_level
+	var target := 1.0 if is_underwater else 0.0
+	_filter_intensity = move_toward(_filter_intensity, target, filter_fade_speed * delta)
+
+	if _filter_intensity > 0.001:
+		_filter_rect.visible = true
+		_filter_rect.material.set_shader_parameter("intensity", _filter_intensity)
+	else:
+		_filter_rect.visible = false
+
+
+# ============================================================
+# 原有轨道控制逻辑（不变）
+# ============================================================
 
 func _reconstruct_orbit():
 	_pivot = _get_look_target()
@@ -37,7 +98,6 @@ func _reconstruct_orbit():
 
 
 func _get_look_target() -> Vector3:
-	# 沿相机朝向射线检测目标点，未命中则取前方 _distance 处
 	var space := get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(
 		global_position,
@@ -64,7 +124,6 @@ func _input(event: InputEvent) -> void:
 	if not _initialised:
 		return
 
-	# —— 滚轮缩放 ——
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			_distance *= (1.0 - zoom_speed)
@@ -73,10 +132,8 @@ func _input(event: InputEvent) -> void:
 			_distance *= (1.0 + zoom_speed)
 			_update_transform()
 
-	# —— 中键按下：区分平移(无Shift)和旋转(有Shift) ——
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 		if Input.is_key_pressed(KEY_SHIFT):
-			# Shift+中键按下：获取鼠标下的场景点作为旋转中心
 			var mouse_pos := get_viewport().get_mouse_position()
 			var hit := _get_mouse_hit_point(mouse_pos)
 			if hit != Vector3.ZERO:
@@ -86,11 +143,9 @@ func _input(event: InputEvent) -> void:
 				_rotate_pivot = _pivot
 			_is_rotating = true
 
-	# —— 中键释放：结束旋转 ——
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and not event.pressed:
 		_is_rotating = false
 
-	# —— 中键拖拽平移（不加Shift） ——
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE) \
 			and not Input.is_key_pressed(KEY_SHIFT):
 		var delta: Vector2 = event.relative
@@ -101,7 +156,6 @@ func _input(event: InputEvent) -> void:
 		_pivot += up * delta.y * scale_factor
 		_update_transform()
 
-	# —— Shift+中键拖拽旋转 ——
 	if event is InputEventMouseMotion and _is_rotating:
 		var delta: Vector2 = event.relative
 		_pivot = _rotate_pivot

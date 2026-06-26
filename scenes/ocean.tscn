@@ -2,6 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://prb43dbfiuui" path="res://scenes/origami_robot.tscn" id="1_7i2eo"]
 [ext_resource type="Script" uid="uid://botslqbuqw10f" path="res://scripts/camera_controller.gd" id="2_0"]
+[ext_resource type="Shader" uid="uid://dj3j00v68u6et" path="res://scripts/underwater_filter.gdshader" id="3_filter"]
+
+[sub_resource type="PhysicalSkyMaterial" id="sky_mat"]
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="Environment_mn261"]
+background_mode = 2
+sky = SubResource("sky")
 
 [sub_resource type="StandardMaterial3D" id="water_mat"]
 transparency = 1
@@ -12,11 +22,19 @@ roughness = 0.12
 material = SubResource("water_mat")
 size = Vector2(20, 20)
 
+[sub_resource type="ShaderMaterial" id="underwater_mat"]
+shader = ExtResource("3_filter")
+shader_parameter/intensity = 1.0
+shader_parameter/water_tint = Color(0.02, 0.2, 0.4, 0.6)
+shader_parameter/darkness = 0.5
+
 [node name="Ocean" type="Node3D" unique_id=581517718]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=999999999]
+environment = SubResource("Environment_mn261")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=941725209]
-transform = Transform3D(0.8253356, -0.45928895, 0.328443, 0, 0.5816831, 0.8134155, -0.5646425, -0.6713408, 0.4800838, 0, 0, 0)
-light_energy = 1.1
+transform = Transform3D(0.8253356, -0.45928895, 0.328443, 0, 0.5816831, 0.8134155, -0.5646425, -0.6713408, 0.4800838, 2.7441192, 2.2611034, 0)
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=972885048]
@@ -26,6 +44,18 @@ script = ExtResource("2_0")
 [node name="WaterSurface" type="MeshInstance3D" parent="." unique_id=76097607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012190342, 0.0020660758, 0.004458368)
 mesh = SubResource("water_mesh")
+
+[node name="UnderwaterFilter" type="CanvasLayer" parent="." unique_id=888888888]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="UnderwaterFilter" unique_id=888888889]
+material = SubResource("underwater_mat")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="origami_robot" parent="." unique_id=347729094 instance=ExtResource("1_7i2eo")]
 transform = Transform3D(1, 0, 0, 0, -4.3711378e-08, 0.99999976, 0, -0.99999976, -4.3711378e-08, 0, 0.8804592, 0)
